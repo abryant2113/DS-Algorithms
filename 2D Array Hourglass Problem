@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int max_sum = Integer.MIN_VALUE;
+        int test_max;
+        
+        int[][] array = new int[6][6];
+        
+        Scanner in = new Scanner(System.in);
+        
+        for(int row = 0; row < 6; row++)
+            for(int col = 0; col < 6; col++)
+                array[row][col] = in.nextInt();
+        
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+               test_max = array[0+i][0+j] + array[0+i][1+j] + array[0+i][2+j] + array[1+i][1+j] 
+                                          + array[2+i][0+j] + array[2+i][1+j] + array[2+i][2+j];
+               if(test_max > max_sum)
+                   max_sum = test_max;
+            }       
+        }
+        System.out.println(max_sum);
+    }
+}
