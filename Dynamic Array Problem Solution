@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int n, q, type, listNum, value;
+        int lastAnswer = 0;
+        int index = 0;
+        
+        Scanner in = new Scanner(System.in);
+        
+        //reads in the the first two values
+        n = in.nextInt();
+        q = in.nextInt();
+        
+        ArrayList<Integer>[] seqList = new ArrayList[n];
+        
+        // initializes each of the arraylists
+        for(int i = 0; i < n; i++)
+            seqList[i] = new ArrayList<Integer>();
+        
+        // iterate through all of the queries and perform the calculations
+        for(int queries = 0; queries < q; queries++)
+        {
+        	type = in.nextInt();
+        	listNum = in.nextInt();
+        	value = in.nextInt();
+
+            // if we're given a type 1 query, perform that specific calculation
+        	if(type == 1)
+        	{
+        		index = (listNum ^ lastAnswer) % n;
+        		seqList[index].add(value);
+        	}
+            // otherwise, perform the type 2 query calculation
+        	else
+        	{
+        		index = (listNum ^ lastAnswer) % n;
+        		lastAnswer = seqList[index].get(value % seqList[index].size());
+        		System.out.println(lastAnswer);
+        	}
+        }      
+    }
+}
